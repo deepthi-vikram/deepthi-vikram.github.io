@@ -8,7 +8,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --output-path docs --base-href /deepthi-vikram.github.io/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:once": "ng test --watch=false",
