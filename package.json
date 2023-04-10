@@ -1,9 +1,9 @@
 {
-  "name": "kontent-angular-sample",
+  "name": "kontent-angular-poc",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Enngage/kontent-delivery-angular-sample"
+    "url": "https://github.com/deepthi-vikram/deepthi-vikram.github.io"
   },
   "scripts": {
     "ng": "ng",

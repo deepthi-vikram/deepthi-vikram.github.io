@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kontent-angular-sample": {
+    "kontent-angular-poc": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -57,7 +57,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "https://enngage.github.io/kontent-delivery-angular-sample/"
+              "baseHref": "https://deepthi-vikram.github.io/"
             },
             "development": {
               "buildOptimizer": false,
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "kontent-angular-sample:build:production"
+              "browserTarget": "kontent-angular-poc:build:production"
             },
             "development": {
-              "browserTarget": "kontent-angular-sample:build:development"
+              "browserTarget": "kontent-angular-poc:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kontent-angular-sample:build"
+            "browserTarget": "kontent-angular-poc:build"
           }
         },
         "test": {
@@ -114,5 +114,5 @@
       }
     }
   },
-  "defaultProject": "kontent-angular-sample"
+  "defaultProject": "kontent-angular-poc"
 }
