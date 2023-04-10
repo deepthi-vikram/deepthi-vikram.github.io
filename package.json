@@ -1,21 +1,12 @@
 {
   "name": "kontent-angular-poc",
   "version": "1.0.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/deepthi-vikram/deepthi-vikram.github.io"
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --output-path docs --base-href /deepthi-vikram.github.io/",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "test:once": "ng test --watch=false",
-    "release": "standard-version",
-    "build-demo-gh-pages": "npm run ng build -- --prod --output-path docs --base-href /deepthi-vikram.github.io/",
-    "build:all": "npm run build --output-path docs --base-href /deepthi-vikram.github.io/",
-    "test:all": "npm run test:once"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -41,7 +32,6 @@
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
-    "angular-cli-ghpages": "1.0.0-rc.2",
     "bootstrap": "^5.2.3",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
