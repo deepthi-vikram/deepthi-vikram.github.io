@@ -13,8 +13,8 @@
     "test": "ng test",
     "test:once": "ng test --watch=false",
     "release": "standard-version",
-    "build-demo-gh-pages": "npm run ng build -- --prod",
-    "build:all": "npm run build",
+    "build-demo-gh-pages": "npm run ng build -- --prod --output-path docs --base-href /deepthi-vikram.github.io/",
+    "build:all": "npm run build --output-path docs --base-href /deepthi-vikram.github.io/",
     "test:all": "npm run test:once"
   },
   "private": true,
