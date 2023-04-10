@@ -3,13 +3,18 @@
   <div class="rh09w1 cwidth">
     <h2>Hello {{ displayName }},
     </h2>
+    <div *ngIf="showUserPicker" >
+      <select (change)="changeRole($event)">
+        <option *ngFor="let role of roles" value="{{role.codename}}">{{role.name}}</option> 
+      </select>
+    </div>
     <div *ngIf="!showUserName" style="height: 350px;">
-<h4>Please enter USER HASH_ID to continue: </h4>
-  <span><input type="text" name="user_id" id="user_id" (change)="bindUserId($event)" style="width:500px;"/></span>
-  <span><input type="button" (click)="getUser($event)" value="Login"/></span>
+      <h4>Please enter USER ID to continue: </h4>
+      <span><input type="text" (change)="bindUserID($event)" style="width:500px;" placeholder="Enter AL41490 to get default value"/></span>
+      <span><input type="button" (click)="getUser($event)" value="Login"/></span>
     </div>
     
-    <h4 *ngIf="showUserName">The following are the latest News that may be intereseting to you: 
+    <h4 *ngIf="showUserName">{{ title }}: 
     </h4>
     <div class="rh09tiles col-framework col-justified col-gutters col3">
       <div class="col-w1">
@@ -20,14 +25,18 @@
               </h4>
             </div>
             <div class="rh09-copy" style="height: 96px;">
-              <p innerHTML="{{ carouselItem.description }}">
-              </p>
+              <p innerHTML="{{ carouselItem.desc }}"></p>
             </div>
             <div class="rh09-img">
               <img class=""
                 data-src="{{ carouselItem.image }}"
                 alt="Saudi Arabia cloud region">
             </div>
+          </div>
+          <div style="height: 25px;">
+            <span>
+              {{ carouselItem.date }}
+            </span>
           </div>
           <div class="rh09-cta">
             <a targer="_blank" href="{{ carouselItem.link }}" rel="noreferrer">Read more
@@ -38,5 +47,6 @@
         </div>
       </div>
     </div>
+    <div *ngIf="showUserName" class="rh09-cta" style="float: right;"><a targer="_blank" href="/allnews">See All News</a></div>
   </div>
 </section>

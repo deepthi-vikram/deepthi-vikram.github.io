@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {
   IDeliveryClient,
@@ -8,19 +7,20 @@ import {
   Responses,
   IGroupedNetworkResponse,
 } from '@kentico/kontent-delivery';
-import { AngularHttpService } from '@kentico/kontent-angular-http-service';
 import { Observable, from } from 'rxjs';
 import { observableHelper } from '../helpers/observable.helper';
-import { getRequest } from '../helpers/http.helpers';
+import { previewAPIKey, getFullDate, projectId } from '../helpers/http.helpers';
 import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-news',
-  templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+  templateUrl: './news.component.html'
 })
 export class NewsComponent {
+  preview:boolean = false;
   newsData: any = {};
+  likes:any = 0;
+  comments:any = 0;
   displayName: string;
   isManager: boolean = false;
   id: string = "";
@@ -37,11 +37,21 @@ export class NewsComponent {
   elementResponse?: INetworkResponse<Responses.IViewContentTypeElementResponse, any>;
   itemsFeedResponse?: IGroupedNetworkResponse<Responses.IListItemsFeedAllResponse>;
 
-  constructor(private router : Router, private http: HttpClient, private httpClient: HttpClient, private cdr: ChangeDetectorRef) {
-    this.deliveryClient = createDeliveryClient({
-      projectId: '27fea92e-2633-0035-9c21-b601899437c5',
-      httpService: new AngularHttpService(httpClient),
-    });
+  constructor(private router : Router, private cdr: ChangeDetectorRef) {
+    if(this.router.url.includes("/preview")){ 
+      this.preview = true;
+      this.deliveryClient = createDeliveryClient({
+        projectId: projectId,
+        previewApiKey: previewAPIKey,
+        defaultQueryConfig: {
+          usePreviewMode: true, // Queries the Delivery Preview API.
+        }
+      });
+    } else {
+      this.deliveryClient = createDeliveryClient({
+        projectId: projectId,
+      });
+    }
     this.displayName = "";
    }
 
@@ -59,11 +69,11 @@ export class NewsComponent {
         map((response) => {
           this.itemsResponse = response;
           console.log('this.itemsResponse = '+ JSON.stringify(this.itemsResponse));
-          response.data.items.forEach((element) => { 
-          this.newsData['title'] = element.elements.title.value;
-          this.newsData['description'] = element.elements.description.value;
-          this.newsData['image'] = element.elements.image.value[0].url;
-          });
+          let element = response.data.items[0];
+          this.newsData['title'] = element.elements.article_details__title.value;
+          this.newsData['desc'] = element.elements.web_page_content__contact.value;
+          this.newsData['image'] = element.elements.web_page_content__image.value[0].url;
+          this.newsData['date'] = getFullDate(""+element.system.lastModified);
           this.cdr.markForCheck();
         })
       ),

@@ -7,14 +7,20 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { TileComponent } from './tile/tile.component';
 import { NewsComponent } from './news/news.component';
+import { MyHrComponent } from './myhr/myhr.component';
 
 @NgModule({
-  declarations: [AppComponent, TileComponent, NewsComponent],
+  declarations: [AppComponent, TileComponent, NewsComponent, MyHrComponent],
   imports: [BrowserModule, HttpClientModule, NgxJsonViewerModule,
     RouterModule.forRoot([
+      {path: '', component: TileComponent},
+      {path: 'preview', component: TileComponent},
       {path: 'news/:id', component: NewsComponent},
+      {path: 'preview/news/:id', component: NewsComponent},
+      {path: 'myHR', component: MyHrComponent},
+      {path: 'preview/myHR', component: MyHrComponent},
   ]),],
   providers: [],
-  bootstrap: [AppComponent, TileComponent, NewsComponent],
+  bootstrap: [AppComponent, TileComponent, NewsComponent, MyHrComponent],
 })
 export class AppModule {}
